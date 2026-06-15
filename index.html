@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FORMA — Pracownia Architektury Wnętrz</title>
+  <meta name="description" content="FORMA to pracownia architektury wnętrz. Projektujemy eleganckie, ponadczasowe przestrzenie mieszkalne i komercyjne — kompleksowo, od koncepcji po realizację." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Czcionki -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ====== NAWIGACJA ====== -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#hero" class="brand">FORMA<span>.</span></a>
+      <nav class="nav__links" id="navLinks">
+        <a href="#o-nas">O pracowni</a>
+        <a href="#uslugi">Usługi</a>
+        <a href="#realizacje">Realizacje</a>
+        <a href="#proces">Proces</a>
+        <a href="#opinie">Opinie</a>
+        <a href="#kontakt" class="nav__cta">Kontakt</a>
+      </nav>
+      <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ====== HERO ====== -->
+  <section class="hero" id="hero">
+    <div class="hero__bg"></div>
+    <div class="container hero__inner">
+      <p class="eyebrow reveal">Pracownia architektury wnętrz</p>
+      <h1 class="hero__title reveal">Przestrzenie, które<br/>oddychają <em>elegancją</em></h1>
+      <p class="hero__lead reveal">Projektujemy ponadczasowe wnętrza mieszkalne i komercyjne — kompleksowo, od pierwszego szkicu po ostatni detal realizacji.</p>
+      <div class="hero__actions reveal">
+        <a href="#kontakt" class="btn btn--gold">Umów konsultację</a>
+        <a href="#realizacje" class="btn btn--ghost">Zobacz realizacje</a>
+      </div>
+    </div>
+    <a href="#o-nas" class="hero__scroll" aria-label="Przewiń w dół">
+      <span></span>
+    </a>
+  </section>
+
+  <!-- ====== O PRACOWNI ====== -->
+  <section class="section" id="o-nas">
+    <div class="container grid-2">
+      <div class="reveal">
+        <p class="eyebrow">O pracowni</p>
+        <h2 class="section__title">Tworzymy wnętrza z charakterem i&nbsp;duszą</h2>
+        <p class="lead">FORMA to studio projektowe, które wierzy, że dobre wnętrze nie krzyczy — ono opowiada historię. Łączymy szlachetne materiały, przemyślane światło i&nbsp;funkcjonalność w&nbsp;przestrzenie, do których chce się wracać.</p>
+        <p>Pracujemy kameralnie i&nbsp;w&nbsp;pełnym zaufaniu z&nbsp;klientem. Każdy projekt prowadzimy osobiście — od koncepcji, przez dokumentację techniczną, aż po nadzór nad wykonawcami.</p>
+        <div class="stats">
+          <div class="stat"><span class="stat__num" data-count="120">0</span><span class="stat__label">zrealizowanych projektów</span></div>
+          <div class="stat"><span class="stat__num" data-count="14">0</span><span class="stat__label">lat doświadczenia</span></div>
+          <div class="stat"><span class="stat__num" data-count="9">0</span><span class="stat__label">nagród branżowych</span></div>
+        </div>
+      </div>
+      <div class="about__img reveal" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ====== USŁUGI ====== -->
+  <section class="section section--alt" id="uslugi">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Usługi</p>
+        <h2 class="section__title">Czym się zajmujemy</h2>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card__num">01</div>
+          <h3>Projektowanie wnętrz</h3>
+          <p>Kompleksowe projekty mieszkań, domów i&nbsp;apartamentów — układ funkcjonalny, koncepcja, wizualizacje 3D i&nbsp;pełna dokumentacja techniczna.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card__num">02</div>
+          <h3>Wnętrza komercyjne</h3>
+          <p>Biura, restauracje, hotele i&nbsp;przestrzenie usługowe, które budują markę i&nbsp;dobrze służą ludziom, którzy z&nbsp;nich korzystają.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card__num">03</div>
+          <h3>Nadzór autorski</h3>
+          <p>Czuwamy nad realizacją na budowie — koordynujemy wykonawców i&nbsp;dbaramy o&nbsp;to, by efekt był wierny projektowi w&nbsp;każdym detalu.</p>
+        </article>
+        <article class="card reveal">
+          <div class="card__num">04</div>
+          <h3>Konsultacje projektowe</h3>
+          <p>Pojedyncze spotkanie, podczas którego pomożemy rozwiązać konkretny problem przestrzenny, dobrać kolory, materiały lub oświetlenie.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== REALIZACJE ====== -->
+  <section class="section" id="realizacje">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Realizacje</p>
+        <h2 class="section__title">Wybrane projekty</h2>
+      </div>
+      <div class="gallery">
+        <figure class="gallery__item gallery__item--tall reveal">
+          <div class="gallery__img" data-img="1"></div>
+          <figcaption><span>Apartament Mokotów</span><em>120 m² · 2024</em></figcaption>
+        </figure>
+        <figure class="gallery__item reveal">
+          <div class="gallery__img" data-img="2"></div>
+          <figcaption><span>Dom pod Warszawą</span><em>240 m² · 2023</em></figcaption>
+        </figure>
+        <figure class="gallery__item reveal">
+          <div class="gallery__img" data-img="3"></div>
+          <figcaption><span>Restauracja NOVA</span><em>Lokal · 2023</em></figcaption>
+        </figure>
+        <figure class="gallery__item gallery__item--wide reveal">
+          <div class="gallery__img" data-img="4"></div>
+          <figcaption><span>Loft Praga</span><em>95 m² · 2022</em></figcaption>
+        </figure>
+        <figure class="gallery__item reveal">
+          <div class="gallery__img" data-img="5"></div>
+          <figcaption><span>Biuro Studio K.</span><em>320 m² · 2022</em></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== PROCES ====== -->
+  <section class="section section--alt" id="proces">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Proces</p>
+        <h2 class="section__title">Jak wygląda współpraca</h2>
+      </div>
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step__num">1</span>
+          <h3>Spotkanie i&nbsp;brief</h3>
+          <p>Poznajemy Ciebie, przestrzeń i&nbsp;Twoje potrzeby. Ustalamy budżet, styl i&nbsp;harmonogram.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">2</span>
+          <h3>Koncepcja</h3>
+          <p>Przygotowujemy układ funkcjonalny, moodboard i&nbsp;pierwsze wizualizacje kierunku projektu.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">3</span>
+          <h3>Projekt techniczny</h3>
+          <p>Tworzymy pełną dokumentację wykonawczą, zestawienia materiałów i&nbsp;mebli.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step__num">4</span>
+          <h3>Realizacja</h3>
+          <p>Prowadzimy nadzór autorski i&nbsp;koordynujemy wykonawców aż do oddania gotowego wnętrza.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ====== OPINIE ====== -->
+  <section class="section" id="opinie">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Opinie</p>
+        <h2 class="section__title">Co mówią klienci</h2>
+      </div>
+      <div class="quotes">
+        <blockquote class="quote reveal">
+          <p>„FORMA zamieniła nasze mieszkanie w&nbsp;miejsce, którego nie chce się opuszczać. Dbałość o&nbsp;detal i&nbsp;wyczucie były niesamowite."</p>
+          <cite>Anna &amp; Marek — apartament, Mokotów</cite>
+        </blockquote>
+        <blockquote class="quote reveal">
+          <p>„Profesjonalizm na każdym etapie. Projekt biura przerósł nasze oczekiwania, a&nbsp;nadzór oszczędził nam mnóstwa stresu."</p>
+          <cite>Katarzyna — Studio K.</cite>
+        </blockquote>
+        <blockquote class="quote reveal">
+          <p>„Słuchają, rozumieją i&nbsp;tłumaczą. Czuliśmy się prowadzeni za rękę przez cały proces remontu domu."</p>
+          <cite>Rodzina Nowaków — dom pod Warszawą</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== KONTAKT ====== -->
+  <section class="section section--contact" id="kontakt">
+    <div class="container grid-2 grid-2--contact">
+      <div class="reveal">
+        <p class="eyebrow">Kontakt</p>
+        <h2 class="section__title">Porozmawiajmy o&nbsp;Twoim wnętrzu</h2>
+        <p class="lead">Napisz kilka słów o&nbsp;swoim projekcie — odezwiemy się w&nbsp;ciągu dwóch dni roboczych i&nbsp;zaproponujemy bezpłatną konsultację wstępną.</p>
+        <ul class="contact__info">
+          <li><span>E-mail</span><a href="mailto:kontakt@forma-wnetrza.pl">kontakt@forma-wnetrza.pl</a></li>
+          <li><span>Telefon</span><a href="tel:+48123456789">+48 123 456 789</a></li>
+          <li><span>Pracownia</span>ul. Przykładowa 12, Warszawa</li>
+        </ul>
+      </div>
+      <form class="form reveal" id="contactForm" novalidate>
+        <div class="form__row">
+          <label>Imię i nazwisko
+            <input type="text" name="name" required placeholder="Jan Kowalski" />
+          </label>
+        </div>
+        <div class="form__row">
+          <label>E-mail
+            <input type="email" name="email" required placeholder="jan@przyklad.pl" />
+          </label>
+        </div>
+        <div class="form__row">
+          <label>Wiadomość
+            <textarea name="message" rows="5" required placeholder="Opowiedz o swoim wnętrzu, metrażu i terminie…"></textarea>
+          </label>
+        </div>
+        <button type="submit" class="btn btn--gold btn--full">Wyślij zapytanie</button>
+        <p class="form__note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ====== STOPKA ====== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#hero" class="brand">FORMA<span>.</span></a>
+      <p>Pracownia architektury wnętrz</p>
+      <nav class="footer__links">
+        <a href="#o-nas">O pracowni</a>
+        <a href="#uslugi">Usługi</a>
+        <a href="#realizacje">Realizacje</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <p class="footer__copy">© <span id="year">2026</span> FORMA. Wszelkie prawa zastrzeżone.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -25,9 +25,11 @@ Nazwa marki to placeholder **„FORMA"** — do podmiany na prawdziwą nazwę pr
 
 ```
 strona-pracowni/
-├── index.html        # Cała treść strony (jedna strona, sekcje kotwiczone #id)
-├── styles.css        # Cały wygląd: kolory, czcionki, układ, animacje, RWD
-├── script.js         # Interakcje: menu mobilne, animacje pojawiania, liczniki, formularz
+├── index.html        # Cała treść strony głównej (jedna strona, sekcje kotwiczone #id)
+├── kalkulator.html   # Podstrona: kalkulator kosztów wykończenia (link w nawigacji i stopce)
+├── styles.css        # Cały wygląd: kolory, czcionki, układ, animacje, RWD + style kalkulatora (sekcja na końcu)
+├── script.js         # Interakcje strony głównej: menu mobilne, animacje, liczniki, formularz
+├── kalkulator.js     # Cała logika kalkulatora — ceny i prace w obiekcie CONFIG na górze pliku
 ├── README.md         # Instrukcja dla właściciela (prostym językiem): jak edytować i publikować
 ├── CLAUDE.md         # Ten plik — dokumentacja techniczna dla Claude
 ├── .gitignore        # Pliki ignorowane przez git (.DS_Store, edytory, pliki tymczasowe)
@@ -37,7 +39,23 @@ strona-pracowni/
 
 Dodatkowo, w folderze nadrzędnym projektu istnieje `.claude/launch.json` — konfiguracja
 lokalnego serwera podglądu (`python3 -m http.server 8077 --directory strona-pracowni`).
-Podgląd lokalny: **http://localhost:8077**
+Podgląd lokalny: **http://localhost:8077** (kalkulator: **http://localhost:8077/kalkulator.html**)
+
+### Kalkulator kosztów wykończenia (`kalkulator.html` + `kalkulator.js`)
+
+Osobna podstrona, spójna wizualnie ze stroną główną (te same czcionki i zmienne kolorów).
+Klient dodaje pomieszczenia (z metrażem), wybiera standard (ekonomiczny / standardowy / premium),
+zaznacza zakres prac, lokalizację oraz opcjonalnie usługę projektową — wycena (widełki + cena za m²)
+liczy się na żywo. Przycisk „Wygeneruj PDF" otwiera okienko, w którym klient podaje e-mail (wymagany)
+i zgodę; po tym pobiera się gotowy PDF z kosztorysem. PDF tworzy biblioteka **html2pdf.js** ładowana
+z internetu (CDN) — renderuje obraz strony, więc polskie znaki wyglądają poprawnie.
+
+- **Wszystkie ceny, standardy, regiony i lista prac są w obiekcie `CONFIG` na górze `kalkulator.js`.**
+  Aby zmienić stawkę lub dodać/usunąć pracę — edytuje się tylko `CONFIG`, bez znajomości kodu.
+- Ceny są orientacyjne (robocizna + materiały, rynek 2026) i pokazywane jako widełki ±12%.
+- Dane pracowni na PDF (nazwa, e-mail, telefon) też są w `CONFIG.pracownia` — **to placeholdery do podmiany**.
+- Lead (e-mail klienta) nie jest nigdzie wysyłany automatycznie (strona statyczna). Po pobraniu PDF
+  klient dostaje link „Wyślij wycenę do pracowni" otwierający jego program pocztowy z gotową treścią.
 
 ### Do czego służy każdy plik
 
@@ -53,34 +71,42 @@ Podgląd lokalny: **http://localhost:8077**
 
 ## 3. Decyzje wizualne (design)
 
-**Ogólny styl:** ciemny, elegancki, premium. Dużo przestrzeni, duże zdjęcia wnętrz,
-szeryfowe nagłówki dla klimatu „atelier".
+**Ogólny styl:** jasny, minimalistyczny, architektoniczny. Wzorowany na szablonie
+**„Optik"** (https://optik-template.webflow.io/) — duża, pogrubiona typografia, dużo bieli,
+monochromia (czarno-białe), przyciski-„pigułki" ze strzałką. Sekcja opinii i podsumowanie
+kalkulatora są na ciemnym tle dla kontrastu.
+> Wcześniej strona była ciemna/złota (Cormorant + Inter). Przeprojektowano na styl Optik 25.06.2026.
 
 ### Kolory (zdefiniowane jako zmienne CSS w `:root` w `styles.css`)
 
 | Zmienna | Wartość | Zastosowanie |
 |---------|---------|--------------|
-| `--bg` | `#0e0e10` | główne tło (prawie czarne) |
-| `--bg-alt` | `#141417` | tło sekcji naprzemiennych |
-| `--surface` | `#1a1a1f` | karty, formularz |
-| `--line` | `rgba(255,255,255,0.09)` | subtelne linie / obramowania |
-| `--text` | `#ece9e4` | główny tekst (ciepła biel) |
-| `--text-soft` | `#a8a39b` | tekst drugorzędny (szary) |
-| `--gold` | `#c5a572` | **kolor akcentu** — akcenty, przyciski, liczby |
-| `--gold-soft` | `#d8c39a` | jaśniejsze złoto (hover) |
+| `--bg` | `#f4f3f1` | główne tło (ciepła biel) |
+| `--bg-alt` | `#ebeae7` | tło sekcji naprzemiennych |
+| `--surface` | `#ffffff` | karty, formularze |
+| `--dark` | `#141414` | ciemne bloki (opinie, stopka, podsumowanie wyceny) |
+| `--ink` / `--text` | `#141414` / `#1b1b1b` | nagłówki / tekst |
+| `--text-soft` | `#6d6d6a` | tekst drugorzędny (szary) |
+| `--line` / `--line-soft` | `rgba(0,0,0,.12)` / `.07` | obramowania / subtelne linie |
+| `--gold` | `#141414` | **akcent** — w monochromii niemal czarny. Nazwa „--gold" zostaje dla zgodności z kalkulatorem. |
+| `--gold-soft` | `#2c2c2c` | hover na przyciskach |
+| `--on-accent` | `#ffffff` | tekst na ciemnym przycisku |
 
 > Aby zmienić całą kolorystykę, wystarczy edytować te zmienne w jednym miejscu (`:root`).
+> Zmiana `--bg`/`--surface`/`--gold` przeładowuje wygląd **i strony głównej, i kalkulatora**.
 
-### Czcionki (Google Fonts, ładowane w `index.html`)
+### Czcionki (Google Fonts, ładowane w `index.html` i `kalkulator.html`)
 
-- **Nagłówki:** „Cormorant Garamond" (szeryfowa, elegancka) — zmienna `--serif`.
-- **Tekst:** „Inter" (bezszeryfowa, czytelna), grubość bazowa 300 — zmienna `--sans`.
+- **Nagłówki:** „Phudu" (gruba, geometryczna, lekko „architektoniczna") — zmienna `--serif`
+  (nazwa zostaje dla zgodności; to teraz czcionka nagłówkowa, nie szeryfowa).
+- **Tekst:** „Urbanist" (geometryczna bezszeryfowa), grubość bazowa 500 — zmienna `--sans`.
 
 ### Układ i zasady
 
-- Maksymalna szerokość treści: `--max: 1180px`, kontener `.container` (90% szerokości, wyśrodkowany).
-- Zaokrąglenia: małe, `--radius: 4px` (styl premium, nie „zabawkowy").
-- Nawigacja przyklejona u góry; po przewinięciu zyskuje rozmyte ciemne tło (`.nav.scrolled`).
+- Maksymalna szerokość treści: `--max: 1200px`, kontener `.container` (90% szerokości, wyśrodkowany).
+- Zaokrąglenia: `--radius: 10px`, karty `--radius-lg: 22px`, przyciski to pełne „pigułki" (999px).
+- Przyciski `.btn` mają automatyczną strzałkę „→" (przez `::after`); aby ją wyłączyć — dodaj klasę `.btn--plain`.
+- Nawigacja przyklejona u góry; po przewinięciu zyskuje rozmyte jasne tło (`.nav.scrolled`).
 - Animacje pojawiania: elementy z klasą `.reveal` są niewidoczne, dopóki nie wejdą w widok
   (obsługa przez IntersectionObserver w `script.js`). **Uwaga:** świeżo dodany element bez klasy
   `.reveal` pojawi się od razu; z klasą `.reveal` — animowany przy przewijaniu.
@@ -93,18 +119,19 @@ szeryfowe nagłówki dla klimatu „atelier".
 Strona jest **jednostronicowa** (one-page). Nawigacja przewija do sekcji (kotwice `#id`).
 Kolejność sekcji w `index.html`:
 
-1. **Nawigacja** (`#nav`) — logo „FORMA", linki, przycisk „Kontakt", hamburger na mobile.
-2. **Hero** (`#hero`) — pełnoekranowe zdjęcie wnętrza, hasło „Przestrzenie, które oddychają elegancją",
-   dwa przyciski: „Umów konsultację" i „Zobacz realizacje".
-3. **O pracowni** (`#o-nas`) — opis + zdjęcie + statystyki (animowane liczniki:
+1. **Nawigacja** (`#nav`) — logo „FORMA", linki, „Kontakt" jako pigułka, hamburger na mobile.
+2. **Hero** (`#hero`) — duży nagłówek Phudu „Od koncepcji po realizację…", dwa przyciski
+   („Zobacz realizacje", „Umów konsultację") i szerokie zdjęcie wnętrza pod spodem.
+3. **Pasek przewijany** (`.marquee`) — animowany pasek haseł („Architektura · Wnętrza mieszkalne…").
+4. **O pracowni** (`#o-nas`) — opis + zdjęcie + statystyki (animowane liczniki:
    projekty / lata doświadczenia / nagrody).
-4. **Usługi** (`#uslugi`) — 4 karty: Projektowanie wnętrz, Wnętrza komercyjne, Nadzór autorski, Konsultacje.
-5. **Realizacje** (`#realizacje`) — galeria 5 projektów (siatka z kafelkami o różnych rozmiarach,
-   podpisy pojawiają się po najechaniu).
-6. **Proces** (`#proces`) — 4 kroki współpracy (brief → koncepcja → projekt techniczny → realizacja).
-7. **Opinie** (`#opinie`) — 3 cytaty klientów.
-8. **Kontakt** (`#kontakt`) — dane kontaktowe + formularz (imię, e-mail, wiadomość).
-9. **Stopka** (`.footer`) — logo, linki, rok (automatyczny), nota o prawach autorskich.
+5. **Usługi** (`#uslugi`) — 4 karty **ze zdjęciami**: Projektowanie wnętrz, Wnętrza komercyjne,
+   Nadzór autorski, Konsultacje.
+6. **Realizacje** (`#realizacje`) — galeria 4 projektów (zdjęcie + nazwa + lokalizacja z „pinezką").
+7. **Proces** (`#proces`) — 4 kroki współpracy (brief → koncepcja → projekt techniczny → realizacja).
+8. **Opinie** (`#opinie`) — sekcja na **ciemnym tle**, 3 cytaty klientów z gwiazdkami.
+9. **Kontakt** (`#kontakt`) — dane kontaktowe + formularz (imię, e-mail, wiadomość).
+10. **Stopka** (`.footer`) — **ciemna**, logo, linki, rok (automatyczny), nota o prawach autorskich.
 
 ---
 

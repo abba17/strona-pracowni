@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kalkulator kosztów wykończenia — FORMA</title>
+  <meta name="description" content="Oblicz orientacyjny koszt wykończenia mieszkania lub domu. Wybierz pomieszczenia, standard i zakres prac, a następnie pobierz wycenę w PDF — FORMA, pracownia architektury wnętrz." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Czcionki (te same co na stronie głównej) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Phudu:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ====== NAWIGACJA ====== -->
+  <header class="nav scrolled" id="nav">
+    <div class="container nav__inner">
+      <a href="index.html#hero" class="brand">FORMA<span>.</span></a>
+      <nav class="nav__links" id="navLinks">
+        <a href="index.html#o-nas">O pracowni</a>
+        <a href="index.html#uslugi">Usługi</a>
+        <a href="index.html#realizacje">Realizacje</a>
+        <a href="kalkulator.html">Kalkulator</a>
+        <a href="index.html#kontakt" class="nav__cta">Kontakt</a>
+      </nav>
+      <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ====== KALKULATOR ====== -->
+  <main class="section calc-page">
+    <div class="container">
+
+      <div class="calc-intro reveal">
+        <p class="eyebrow">Kalkulator</p>
+        <h1 class="section__title">Orientacyjny koszt wykończenia</h1>
+        <p class="lead">Dodaj pomieszczenia, wybierz standard i&nbsp;zakres prac — wycena policzy się sama. Na koniec możesz pobrać gotowe podsumowanie w&nbsp;PDF.</p>
+      </div>
+
+      <div class="calc-layout">
+
+        <!-- LEWA KOLUMNA: FORMULARZ -->
+        <div class="calc-form">
+
+          <!-- Krok 1: Pomieszczenia -->
+          <section class="calc-step reveal">
+            <div class="calc-step__head">
+              <span class="calc-step__num">1</span>
+              <h2 class="calc-step__title">Pomieszczenia</h2>
+            </div>
+            <p class="calc-step__hint">Dodaj pomieszczenia do wykończenia i&nbsp;podaj ich powierzchnię w&nbsp;m².</p>
+            <div id="roomsContainer"></div>
+            <button type="button" class="room-add" id="addRoom">+ Dodaj pomieszczenie</button>
+            <div class="room-meta">
+              <span>Powierzchnia łączna: <strong id="metaTotal">0 m²</strong></span>
+              <span>w tym strefa mokra: <strong id="metaWet">0 m²</strong></span>
+            </div>
+          </section>
+
+          <!-- Krok 2: Standard -->
+          <section class="calc-step reveal">
+            <div class="calc-step__head">
+              <span class="calc-step__num">2</span>
+              <h2 class="calc-step__title">Standard wykończenia</h2>
+            </div>
+            <p class="calc-step__hint">Wpływa na jakość materiałów i&nbsp;poziom wykończenia.</p>
+            <div class="std-grid" id="standardContainer"></div>
+          </section>
+
+          <!-- Krok 3: Zakres prac -->
+          <section class="calc-step reveal">
+            <div class="calc-step__head">
+              <span class="calc-step__num">3</span>
+              <h2 class="calc-step__title">Zakres prac</h2>
+            </div>
+            <p class="calc-step__hint">Zaznacz prace, które mają wejść do wyceny.</p>
+            <div id="worksContainer"></div>
+          </section>
+
+          <!-- Krok 4: Lokalizacja -->
+          <section class="calc-step reveal">
+            <div class="calc-step__head">
+              <span class="calc-step__num">4</span>
+              <h2 class="calc-step__title">Lokalizacja</h2>
+            </div>
+            <p class="calc-step__hint">Ceny robocizny różnią się w&nbsp;zależności od regionu.</p>
+            <select class="calc-select" id="regionSelect"></select>
+          </section>
+
+          <!-- Krok 5: Usługa projektowa -->
+          <section class="calc-step reveal">
+            <div class="calc-step__head">
+              <span class="calc-step__num">5</span>
+              <h2 class="calc-step__title">Usługa projektowa</h2>
+            </div>
+            <p class="calc-step__hint">Profesjonalny projekt wnętrza — opcjonalnie.</p>
+            <div class="calc-toggle-row">
+              <span class="work-check" id="projektCheck" role="checkbox" tabindex="0" aria-checked="false"></span>
+              <span class="work-text">
+                <span class="work-label" id="projektLabel">Projekt wnętrza</span>
+                <span class="work-hint" id="projektHint"></span>
+              </span>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- PRAWA KOLUMNA: PODSUMOWANIE -->
+        <aside class="calc-summary reveal" id="summary">
+          <h3>Twoja wycena</h3>
+          <div class="sum-meta"><span>Powierzchnia</span><strong id="sumArea">0 m²</strong></div>
+          <div class="sum-meta"><span>Standard</span><strong id="sumStd">—</strong></div>
+          <div class="sum-items" id="sumItems">
+            <p class="sum-empty">Dodaj pomieszczenia i&nbsp;zaznacz prace, aby zobaczyć wycenę.</p>
+          </div>
+          <p class="sum-total__label">Szacowany koszt</p>
+          <p class="sum-total__value" id="sumTotal">— zł</p>
+          <p class="sum-perm2" id="sumPerM2"></p>
+          <button type="button" class="btn btn--gold btn--full btn--plain" id="pdfBtn">Wygeneruj PDF z wyceną</button>
+          <p class="sum-note">To wstępne, orientacyjne wyliczenie poglądowe — nie stanowi oferty handlowej. Dokładny kosztorys przygotujemy po rozmowie o&nbsp;Twoim projekcie.</p>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ====== STOPKA ====== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="index.html#hero" class="brand">FORMA<span>.</span></a>
+      <p>Pracownia architektury wnętrz</p>
+      <nav class="footer__links">
+        <a href="index.html#o-nas">O pracowni</a>
+        <a href="index.html#uslugi">Usługi</a>
+        <a href="index.html#realizacje">Realizacje</a>
+        <a href="kalkulator.html">Kalkulator</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+      <p class="footer__copy">© <span id="year">2026</span> FORMA. Wszelkie prawa zastrzeżone.</p>
+    </div>
+  </footer>
+
+  <!-- ====== OKIENKO: PODAJ E-MAIL, ABY POBRAĆ PDF ====== -->
+  <div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <h3 id="modalTitle">Pobierz wycenę w&nbsp;PDF</h3>
+      <p class="modal__lead">Podaj adres e-mail, na który chcesz otrzymać wycenę — wygenerujemy dla Ciebie gotowy plik PDF.</p>
+      <form id="leadForm" novalidate>
+        <label class="modal__field">Imię (opcjonalnie)
+          <input type="text" id="leadName" name="name" placeholder="Jan Kowalski" autocomplete="name" />
+        </label>
+        <label class="modal__field">Adres e-mail *
+          <input type="email" id="leadEmail" name="email" placeholder="jan@przyklad.pl" autocomplete="email" required />
+        </label>
+        <label class="modal__field">Telefon (opcjonalnie)
+          <input type="tel" id="leadPhone" name="phone" placeholder="+48 600 000 000" autocomplete="tel" />
+        </label>
+        <label class="modal__consent">
+          <input type="checkbox" id="leadConsent" />
+          <span>Chcę otrzymać wycenę i&nbsp;zgadzam się na kontakt ze strony pracowni FORMA w&nbsp;sprawie mojego projektu.</span>
+        </label>
+        <div class="modal__actions">
+          <button type="submit" class="btn btn--gold btn--sm btn--plain">Pobierz PDF</button>
+          <button type="button" class="btn btn--ghost btn--sm btn--plain" id="modalCancel">Anuluj</button>
+        </div>
+        <p class="modal__note" id="modalNote" role="status"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Ukryty kontener, z którego powstaje PDF -->
+  <div class="pdf-stage" id="pdfStage" aria-hidden="true"></div>
+
+  <!-- Biblioteka do tworzenia PDF (ładowana z internetu) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="kalkulator.js"></script>
+</body>
+</html>

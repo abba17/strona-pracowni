@@ -34,7 +34,7 @@ strona-pracowni/
 ├── CLAUDE.md         # Ten plik — dokumentacja techniczna dla Claude
 ├── .gitignore        # Pliki ignorowane przez git (.DS_Store, edytory, pliki tymczasowe)
 └── assets/
-    └── favicon.svg   # Ikonka strony (litera „F" w złotym kolorze) + miejsce na zdjęcia właściciela
+    └── favicon.svg   # Ikonka strony (czarna litera „F" na jasnym tle) + miejsce na zdjęcia właściciela
 ```
 
 Dodatkowo, w folderze nadrzędnym projektu istnieje `.claude/launch.json` — konfiguracja

@@ -1,0 +1,31 @@
+# robots.txt — FORMA, Pracownia Architektury Wnętrz
+# Wpuszczamy crawlery wyszukujące AI — to warunek konieczny, by strona
+# mogła być cytowana w odpowiedziach ChatGPT, Perplexity, Google AI itd.
+
+# --- Crawlery WYSZUKUJĄCE / odpowiadające (cytowanie) ---
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# --- Crawler TRENUJĄCY (zgoda na wykorzystanie treści do trenowania) ---
+# Jeśli kiedyś NIE chcesz, by treść trafiała do trenowania modeli,
+# zmień poniżej "Allow: /" na "Disallow: /".
+User-agent: GPTBot
+Allow: /
+
+# --- Pozostałe boty (Google, Bing klasyczny itd.) ---
+User-agent: *
+Allow: /
+
+Sitemap: https://abba17.github.io/strona-pracowni/sitemap.xml

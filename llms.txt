@@ -1,0 +1,21 @@
+# FORMA — Pracownia Architektury Wnętrz
+
+> FORMA to pracownia architektury wnętrz, która projektuje ponadczasowe wnętrza mieszkalne i komercyjne — kompleksowo, od koncepcji, przez dokumentację techniczną i wizualizacje 3D, aż po nadzór autorski nad realizacją.
+
+## Strony
+- [Strona główna](https://abba17.github.io/strona-pracowni/): oferta, realizacje, proces współpracy, opinie klientów, najczęstsze pytania i kontakt.
+- [Kalkulator kosztów wykończenia](https://abba17.github.io/strona-pracowni/kalkulator.html): interaktywne, orientacyjne wyliczenie kosztu wykończenia mieszkania lub domu (pomieszczenia, standard, zakres prac, region) z możliwością pobrania wyceny w PDF.
+
+## Usługi
+- Projektowanie wnętrz mieszkalnych — mieszkania, domy, apartamenty (układ funkcjonalny, koncepcja, wizualizacje 3D, dokumentacja techniczna).
+- Projektowanie wnętrz komercyjnych — biura, restauracje, hotele, przestrzenie usługowe.
+- Nadzór autorski — koordynacja wykonawców i czuwanie nad zgodnością realizacji z projektem.
+- Konsultacje projektowe — pojedyncze spotkanie z konkretnym problemem przestrzennym.
+
+## Obszar działania
+- Warszawa i okolice oraz realizacje na terenie całej Polski.
+
+## Kontakt
+- E-mail: kontakt@forma-wnetrza.pl
+- Telefon: +48 123 456 789
+- Pracownia: ul. Przykładowa 12, Warszawa
